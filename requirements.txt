@@ -1,0 +1,27 @@
+# --- Web framework ---
+fastapi
+uvicorn[standard]
+python-multipart      # required by FastAPI to parse UploadFile (PDF/image uploads)
+
+# --- MongoDB ---
+motor                 # async driver, used by the app at request time
+pymongo>=4.7           # sync driver, used by scripts/create_vector_index.py & scripts/check_ppt_index.py
+
+# --- Config / env ---
+python-decouple
+python-dotenv
+
+# --- Auth ---
+python-jose[cryptography]
+passlib[bcrypt]
+email-validator        # needed by pydantic's EmailStr (used in schemas/user_schema.py)
+
+# --- PPT/PDF retrieval feature ---
+PyMuPDF                # PDF text + embedded image extraction (import name: pymupdf, not fitz)
+sentence-transformers  # local embedding model (all-MiniLM-L6-v2)
+numpy                  # cosine similarity math in the fallback branch
+google-genai            # Gemini API client (image description)
+
+# --- legacy scraper.py (URL text extraction, not part of the PDF flow) ---
+requests
+beautifulsoup4
